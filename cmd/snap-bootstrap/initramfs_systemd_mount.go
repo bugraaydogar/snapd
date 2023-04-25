@@ -75,6 +75,8 @@ type systemdMountOptions struct {
 	ReadOnly bool
 	// Private mount
 	Private bool
+    // data=journal mount
+	DataJournal bool
 	// Umount the mountpoint
 	Umount bool
 }
@@ -151,6 +153,11 @@ func doSystemdMountImpl(what, where string, opts *systemdMountOptions) error {
 	if opts.Private {
 		options = append(options, "private")
 	}
+
+	if opts.DataJournal {
+		options = append(options, "data=journal")
+	}
+
 	if len(options) > 0 {
 		args = append(args, "--options="+strings.Join(options, ","))
 	}

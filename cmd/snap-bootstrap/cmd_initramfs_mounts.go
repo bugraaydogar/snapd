@@ -948,6 +948,7 @@ func (m *recoverModeStateMachine) mountData() (stateFunc, error) {
 	mountOpts := &systemdMountOptions{
 		NoSuid:  true,
 		Private: true,
+		DataJournal: true,
 	}
 	mountErr := doSystemdMount(data.fsDevice, boot.InitramfsHostUbuntuDataDir, mountOpts)
 	if err := m.setMountState("ubuntu-data", boot.InitramfsHostUbuntuDataDir, mountErr); err != nil {
